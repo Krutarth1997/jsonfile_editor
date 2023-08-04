@@ -16,11 +16,15 @@ def modify_json(data):
     ##if contact_selected == "1":
     ## data["id"] = st.number_input("agent parameter id", value=data["id"])
       ## with data["velocity_model_parameter_profiles"]: 
-    for i in data["velocity_model_parameter_profiles"]:
-        data["time_gap"] = st.number_input("time_gap", value=data["time_gap"]),
-        data["tau"] = st.number_input("tau", value=data["tau"]),
-        data["v0"] = st.number_input("v0", value=data["v0"]),
-        data["radius"] = st.number_input("radius", value=data["radius"])
+        # Check if velocity_model_parameter_profiles key exists
+    if "velocity_model_parameter_profiles" in data:
+        st.write("Velocity Model Parameter Profiles")
+        profiles = data["velocity_model_parameter_profiles"]
+        for i, profile in enumerate(profiles):
+            profile["time_gap"] = st.number_input(f"Enter new 'tg' value for profile {i+1}", value=profile["time_gap"])
+            profile["tau"] = st.number_input(f"Enter new 'tau' value for profile {i+1}", value=profile["tau"])
+            profile["v0"] = st.number_input(f"Enter new 'v0' value for profile {i+1}", value=profile["v0"])
+            profile["radius"] = st.number_input(f"Enter new 'radius' value for profile {i+1}", value=profile["radius"])
         
     return data
 
